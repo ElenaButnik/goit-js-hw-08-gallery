@@ -62,12 +62,15 @@ const galleryItems = [
         'https://cdn.pixabay.com/photo/2019/05/17/04/35/lighthouse-4208843_1280.jpg',
       description: 'Lighthouse Coast Sea',
     },
+   
   ];
 
   const galleryContainer = document.querySelector('.js-gallery');
   const openModal = document.querySelector('.js-lightbox');
   const closeModal = document.querySelector('button[data-action="close-lightbox"]');
   const image = document.querySelector('.lightbox__image');
+  const lightboxOverlay = document.querySelector('.lightbox__overlay');
+  const galleryList = document.querySelector('.gallery__link');
   
 
   const  galleryMarkup = createGalleryMarkup(galleryItems);
@@ -78,6 +81,9 @@ const galleryItems = [
   galleryContainer.addEventListener('click', onGalleryClick);
   openModal.addEventListener('click', onGalleryClick);
   closeModal.addEventListener('click', onModalClose);
+  window.addEventListener('keyup', oncloseModalEscape);
+  lightboxOverlay.addEventListener('click', onOverlayClose);
+  window.addEventListener('keypress', onEnterList);
 
   function createGalleryMarkup (galleryItems) {
     return galleryItems
@@ -89,11 +95,12 @@ const galleryItems = [
     href="${original}"
   >
     <img
-      class="gallery__image"
+      loading="lazy"
+      class="gallery__image lazyload"
       src="${preview}"
       data-source="${original}"
       alt="${description}"
-    />
+      />
   </a>
 </li>`
     })
@@ -109,14 +116,33 @@ const galleryItems = [
     }
     
     openModal.classList.add('is-open');
-    image.setAttribute('src', evt.target.dataset.sourсe);
+    image.setAttribute('src', evt.target.dataset.source);
     image.setAttribute('alt', evt.target.alt);
   }
 
    
-
   function onModalClose (evt) {
     
     openModal.classList.remove('is-open');
+    image.removeAttribute('src');
+    image.removeAttribute('alt');
    }
    
+  function oncloseModalEscape (evt) {
+    if (evt.key !== "Escape") {
+      return;
+    }
+    onModalClose ();
+  }
+
+  function onOverlayClose (evt) {
+    onModalClose ();
+   }
+
+ function onEnterList (evt) {
+   if (evt.key === 'ArrowRight') {
+      image.setAttribute('src', evt.target.getAttribute(tabindex));
+   }
+ }
+
+  
