@@ -66,7 +66,7 @@ const galleryItems = [
 
   const galleryContainer = document.querySelector('.js-gallery');
   const openModal = document.querySelector('.js-lightbox');
-  const closeModal = document.querySelector('[data-action="close-lightbox"]');
+  const closeModal = document.querySelector('button[data-action="close-lightbox"]');
   const image = document.querySelector('.lightbox__image');
   
 
@@ -109,15 +109,14 @@ const galleryItems = [
     }
     
     openModal.classList.add('is-open');
-     image.setAttribute('src', evt.target.dataset.sourse);
-     image.setAttribute('alt', evt.target.alt);
-    
-    
+    image.setAttribute('src', evt.target.dataset.sourсe);
+    image.setAttribute('alt', evt.target.alt);
   }
 
    
 
   function onModalClose (evt) {
+    
     openModal.classList.remove('is-open');
    }
    
