@@ -83,7 +83,7 @@ const galleryItems = [
   closeModal.addEventListener('click', onModalClose);
   window.addEventListener('keyup', oncloseModalEscape);
   lightboxOverlay.addEventListener('click', onOverlayClose);
-  window.addEventListener('keypress', onEnterList);
+  //window.addEventListener('keypress', onEnterList);
 
   function createGalleryMarkup (galleryItems) {
     return galleryItems
@@ -139,10 +139,10 @@ const galleryItems = [
     onModalClose ();
    }
 
- function onEnterList (evt) {
-   if (evt.key === 'ArrowRight') {
-      image.setAttribute('src', evt.target.getAttribute(tabindex));
-   }
- }
+//  function onEnterList (evt) {
+//    if (evt.key === 'ArrowRight') {
+//       image.setAttribute('src', evt.target.getAttribute(tabindex));
+//    }
+//  }
 
   
